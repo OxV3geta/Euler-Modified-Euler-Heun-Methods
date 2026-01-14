@@ -1,7 +1,8 @@
 #include "../include/NumericalMethods.h"
 #include <cmath>
 
-std::vector<DataPoint> NumericalSolver::solveEuler(Func f, ExactFunc exact, double y0, double t0,double tend,double h) {
+std::vector<DataPoint> NumericalSolver::solveEuler(Func f, ExactFunc exact, double y0, double t0,double tend,double h) 
+{
     std::vector<DataPoint> results;
     double t = t0;
     double y = y0;
@@ -20,11 +21,50 @@ std::vector<DataPoint> NumericalSolver::solveEuler(Func f, ExactFunc exact, doub
     return results;
 }
 
-std::vector<DataPoint> NumericalSolver::solveHeun(Func f, Exactfunc exact, double y0, double t0, double tend, double h) {
+std::vector<DataPoint> NumericalSolver::solveHeun(Func f, ExactFunc exact, double y0, double t0, double tend, double h) 
+{
     std::vector<DataPoint> results;
     double t = t0;
     double y = y0;
 
     results.push_back({t, y, exact(t), std::abs(y - exact(t))});
+
+
+    while ( t < tend)
+    {
+        double slope1 = f(t,y);
+        double y_predict = y + h * slope1;
+
+        double slope2 = f(t + h, y_predict);
+        y = y+ (h / 2.0) * (slope1 + slope2) ;
+
+        t = t + h ;
+
+        double exact_val = exact(t) ;
+        results.push_back({t, y, exact_val, std :: abs(y - exact_val)}) ;
+    }
+    return results ;
 }
 
+std :: vector<DataPoint> NumericalSolver :: solveMidpoint(Func f, ExactFunc exact, double y0, double t0, double tend, double h){
+    std :: vector<DataPoint> results ;
+    double t = t0 ;
+    double y = y0 ;
+
+    results.push_back({t, y, exact(t), std :: abs(y-exact(t))}) ;
+
+    while(t < tend)
+    {
+        double k1 = f(t, y);
+
+        double k2 = f(t + h / 2.0, y + (h * k1 / 2.0)) ;
+
+        y = y + h * k2 ;
+        t = t + h ;
+
+        double exact_val = exact(t) ;
+        results.push_back({t, y, exact_val, std :: abs(y - exact_val)}) ;
+    }
+    return results ;
+
+}
