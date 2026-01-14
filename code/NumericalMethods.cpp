@@ -28,4 +28,3 @@ std::vector<DataPoint> NumericalSolver::solveHeun(Func f, Exactfunc exact, doubl
     results.push_back({t, y, exact(t), std::abs(y - exact(t))});
 }
 
-// part 1
