@@ -32,11 +32,13 @@ std::vector<DataPoint> NumericalSolver::solveHeun(Func f, ExactFunc exact, doubl
 
     while ( t < tend)
     {
-        double slope1 = f(t,y);
+        // 1. Predictor (Euler step)
+        double slope1 = f(t, y);
         double y_predict = y + h * slope1;
-
+        
+        // 2. corrector
         double slope2 = f(t + h, y_predict);
-        y = y+ (h / 2.0) * (slope1 + slope2) ;
+        y = y + (h / 2.0) * (slope1 + slope2) ;
 
         t = t + h ;
 
@@ -46,7 +48,8 @@ std::vector<DataPoint> NumericalSolver::solveHeun(Func f, ExactFunc exact, doubl
     return results ;
 }
 
-std :: vector<DataPoint> NumericalSolver :: solveMidpoint(Func f, ExactFunc exact, double y0, double t0, double tend, double h){
+std :: vector<DataPoint> NumericalSolver :: solveMidpoint(Func f, ExactFunc exact, double y0, double t0, double tend, double h)
+{
     std :: vector<DataPoint> results ;
     double t = t0 ;
     double y = y0 ;
@@ -55,16 +58,17 @@ std :: vector<DataPoint> NumericalSolver :: solveMidpoint(Func f, ExactFunc exac
 
     while(t < tend)
     {
-        double k1 = f(t, y);
+        double k1 = f(t, y);     // calculate k1
 
-        double k2 = f(t + h / 2.0, y + (h * k1 / 2.0)) ;
+        double k2 = f(t + h / 2.0, y + (h * k1 / 2.0)) ;  // calculate k2 (slope at midpoint)
 
-        y = y + h * k2 ;
+        y = y + h * k2 ;    // update y
         t = t + h ;
 
         double exact_val = exact(t) ;
         results.push_back({t, y, exact_val, std :: abs(y - exact_val)}) ;
     }
+    
     return results ;
 
 }
