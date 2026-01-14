@@ -25,4 +25,11 @@ int main() {
     auto midData = NumericalSolver::solveMidpoint(ODEProblems::test_derivative, ODEProblems::test_exact, y0, t0, tend, h_default)
 
 
+    // 3. SAVE DATA FOR PLOTTING
+    // Ensure the 'results' folder exists or path is correct
+    FileWriter::saveTrajectory("results_euler.csv", eulerData);
+    FileWriter::saveTrajectory("results_heun.csv", heunData);
+    FileWriter::saveTrajectory("results_midpoint.csv", midData);
+
+
 
