@@ -32,4 +32,10 @@ int main() {
     FileWriter::saveTrajectory("results_midpoint.csv", midData);
 
 
+    // 4. ERROR ANALYSIS (Error vs Step Size)
+    std::cout << "\nRunning Error vs Step Size Analysis...\n";
+    std::vector<double> stepSizes = {0.2, 0.1, 0.05, 0.025, 0.0125, 0.01};
+    
+
+
 
