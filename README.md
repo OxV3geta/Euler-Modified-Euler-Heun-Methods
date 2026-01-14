@@ -53,6 +53,43 @@ This project implements several advanced software engineering practices applied 
 | **Mahjabeen Tur** | 2024200000319 |
 
 ---
+## 🛠️ Build & Run Instructions
+
+This project separates header files (`include/`) from source logic (`Code/`). Follow these steps to compile and run the simulation.
+
+### 1. Setup Output Directories
+Before running the solver, ensure the output directories exist so the program can save the CSV results and plots.
+
+**Linux / macOS:**
+```bash
+mkdir -p results plots
+```
+### Windows (PowerShell / CMD):
+```bash 
+mkdir results
+mkdir plots
+```
+### 2. Compile the Code
+You must compile the source files and tell the compiler to look in the include folder for headers.
+
+Run the following command in your terminal:
+```bash
+g++ code/main.cpp code/NumericalMethods.cpp code/FileWriter.cpp -I include -o ode_solver
+```
+###3. Run the Solver
+Once compiled, execute the program to generate the solution datasets.
+Linux / macOS:
+```Bash
+./ode_solver
+```
+Windows:
+PowerShell
+```bash
+.\ode_solver.exe
+```
+### Check Results
+After execution, check the results/ folder. You should see the generated CSV files (e.g., euler_data.csv, heun_data.csv) ready for plotting.
+
 
 ## 🏗️ Project Architecture
 The codebase follows a strict **Separation of Concerns** principle to ensure modularity and robustness.
