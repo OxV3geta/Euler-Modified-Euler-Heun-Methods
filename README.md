@@ -76,7 +76,7 @@ Run the following command in your terminal:
 ```bash
 g++ code/main.cpp code/NumericalMethods.cpp code/FileWriter.cpp -I include -o ode_solver
 ```
-###3. Run the Solver
+### 3. Run the Solver
 Once compiled, execute the program to generate the solution datasets.
 Linux / macOS:
 ```Bash
