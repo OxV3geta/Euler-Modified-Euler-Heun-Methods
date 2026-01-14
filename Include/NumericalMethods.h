@@ -22,5 +22,4 @@ public:
     static std::vector<DataPoint> solveMidpoint(Func f, ExactFunc exact, double y0, double t0, double tend, double h);
 };
 
-
 #endif
